@@ -3,80 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plan Your Visit</title>
-
+    <title>SYDNEYDADGUIDE</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
+        /* Body with background image and low opacity overlay */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            min-height: 100vh;
             background: url('./images/background.png') no-repeat center center fixed;
             background-size: cover;
-            color: #fff;
         }
 
-        /* Overlay */
+        /* Overlay to make background transparent/dimmed */
         body::before {
             content: '';
-            position: fixed; /* FIXED instead of absolute */
+            position: absolute;
             top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.4); /* 0.4 = 40% dark overlay */
             z-index: 0;
         }
 
-        .container {
+        /* Content container on top of overlay */
+        .content {
             position: relative;
             z-index: 1;
-            padding: 30px 15px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* smaller for mobile */
-            gap: 15px;
-            max-width: 1000px;
-            margin: auto;
+            padding: 50px 20px;
         }
 
-        .place-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px 10px;
+        /* Fancy gradient title */
+        h1 {
+            font-size: 3em;
+            background: linear-gradient(90deg, #FF5733, #FFC300, #33FFBD, #3375FF);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            color: #ffffff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        /* Fancy city links */
+        a {
+            display: inline-block;
+            margin: 15px;
+            padding: 10px 25px;
+            font-size: 1.2em;
+            color: #ffffff;
             text-decoration: none;
-            color: #fff;
-            font-weight: bold;
-            font-size: 1.1em;
-            text-align: center;
-            backdrop-filter: blur(5px);
-            transition: 0.3s;
+            border: 2px solid #ffffff;
+            border-radius: 25px;
+            transition: all 0.3s ease;
         }
 
-        .place-card:hover {
-            transform: scale(1.05);
-            background: linear-gradient(45deg, #FF5733, #FFC300, #33FFBD, #3375FF);
-        }
-
-        /* Mobile tweaks */
-        @media (max-width: 480px) {
-            .container {
-                padding: 20px 10px;
-                gap: 10px;
-            }
-
-            .place-card {
-                font-size: 1em;
-                padding: 15px 8px;
-            }
+        a:hover {
+            background-color: rgba(255,255,255,0.2);
+            color: #ffcc00;
+            border-color: #ffcc00;
         }
     </style>
 </head>
-
 <body>
-    <div class="container">
-        <a href="https://www.alburycity.nsw.gov.au/whats-on" class="place-card">Albury City</a>
-        <a href="https://www.armidale.nsw.gov.au/Our-region/Events" class="place-card">Armidale</a>
+
+    <div class="content">
+        <h1>SYDNEYDADGUIDE</h1>
+        <!-- Fancy Find a Place button -->
+        <p>Welcome! 
+        </p>
+<a href="plan.html" class="fancy-button">Find a Place</a>
     </div>
+<style>/* Fancy Find a Place button */
+.fancy-button {
+    display: inline-block;
+    padding: 15px 35px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #FF5733, #FFC300, #33FFBD, #3375FF);
+    background-size: 300% 300%;
+    transition: all 0.5s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.fancy-button:hover {
+    background-position: right center;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}</style>
 </body>
 </html>
