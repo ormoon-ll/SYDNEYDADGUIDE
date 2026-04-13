@@ -18,10 +18,9 @@ body {
     background: url('./images/background.png') no-repeat center center/cover;
     min-height: 100vh;
     color: #fff;
-    overflow-x: hidden;
 }
 
-/* DARK OVERLAY */
+/* OVERLAY */
 body::before {
     content: '';
     position: fixed;
@@ -30,30 +29,43 @@ body::before {
     z-index: 0;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 .header {
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 40px 20px 10px;
+    padding: 40px 20px 20px;
 }
 
 .header h1 {
     font-size: 2.5rem;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
 }
 
-.header p {
-    opacity: 0.8;
+/* ===== SEARCH BAR ===== */
+.search-box {
+    margin-top: 20px;
+}
+
+.search-box input {
+    width: 90%;
+    max-width: 400px;
+    padding: 12px 15px;
+    border-radius: 30px;
+    border: none;
+    outline: none;
     font-size: 1rem;
+    text-align: center;
+
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    backdrop-filter: blur(8px);
 }
 
-/* ===== GRID ===== */
+/* GRID */
 .container {
     position: relative;
     z-index: 1;
-    padding: 30px 15px 50px;
+    padding: 20px 15px 50px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 18px;
@@ -61,7 +73,7 @@ body::before {
     margin: auto;
 }
 
-/* ===== CARD ===== */
+/* CARD */
 .place-card {
     text-decoration: none;
     color: #fff;
@@ -74,58 +86,28 @@ body::before {
 
     text-align: center;
     font-weight: 600;
-    font-size: 1.05rem;
 
-    transition: all 0.35s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-/* GLOW EFFECT */
-.place-card::before {
-    content: "";
-    position: absolute;
-    width: 120%;
-    height: 120%;
-    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
-    transform: rotate(25deg);
-    top: -120%;
-    left: -120%;
-    transition: 0.5s;
-}
-
-/* HOVER */
-.place-card:hover::before {
-    top: 120%;
-    left: 120%;
+    transition: 0.3s;
 }
 
 .place-card:hover {
-    transform: translateY(-6px) scale(1.04);
+    transform: scale(1.05);
     background: linear-gradient(135deg, #ff6a00, #ffcc00, #00c9ff);
     color: #000;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
-/* CLICK FEEDBACK */
-.place-card:active {
-    transform: scale(0.97);
+/* NO RESULT TEXT */
+.no-result {
+    text-align: center;
+    margin-top: 20px;
+    display: none;
+    opacity: 0.8;
 }
 
-/* ===== MOBILE ===== */
+/* MOBILE */
 @media (max-width: 480px) {
-
     .header h1 {
         font-size: 1.8rem;
-    }
-
-    .container {
-        gap: 12px;
-    }
-
-    .place-card {
-        padding: 18px 10px;
-        font-size: 0.95rem;
     }
 }
 </style>
@@ -133,23 +115,22 @@ body::before {
 
 <body>
 
-<!-- HEADER -->
 <div class="header">
     <h1>🌏 Plan Your Visit</h1>
-    <p>Explore Events Across Sydney Councils</p>
+
+    <!-- SEARCH -->
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search council...">
+    </div>
 </div>
 
-<!-- GRID -->
-<div class="container">
+<div class="container" id="cardContainer">
 
 <a href="https://www.bayside.nsw.gov.au/whats-on" class="place-card">Bayside Council</a>
 <a href="https://www.blacktown.nsw.gov.au/Events-and-activities" class="place-card">Blacktown City Council</a>
 <a href="https://www.bmcc.nsw.gov.au/whats-on" class="place-card">Blue Mountains City Council</a>
 <a href="https://www.burwood.nsw.gov.au/For-Residents/Events-and-Activities/Events-listing" class="place-card">Burwood Council</a>
-
-<!-- FIXED hre → href -->
 <a href="https://camden-events.bookable.net.au/#!/" class="place-card">Camden Council</a>
-
 <a href="https://www.campbelltown.nsw.gov.au/Whats-On" class="place-card">Campbelltown City Council</a>
 <a href="https://www.canadabay.nsw.gov.au/lifestyle/our-area/events" class="place-card">Canada Bay Council</a>
 <a href="https://www.cbcity.nsw.gov.au/whats-on" class="place-card">Canterbury-Bankstown Council</a>
@@ -177,6 +158,33 @@ body::before {
 <a href="https://www.woollahra.nsw.gov.au/Events" class="place-card">Woollahra Council</a>
 
 </div>
+
+<div class="no-result" id="noResult">No councils found 😢</div>
+
+<!-- SEARCH SCRIPT -->
+<script>
+const searchInput = document.getElementById("searchInput");
+const cards = document.querySelectorAll(".place-card");
+const noResult = document.getElementById("noResult");
+
+searchInput.addEventListener("keyup", function() {
+    let filter = searchInput.value.toLowerCase();
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+        let text = card.textContent.toLowerCase();
+
+        if (text.includes(filter)) {
+            card.style.display = "block";
+            visibleCount++;
+        } else {
+            card.style.display = "none";
+        }
+    });
+
+    noResult.style.display = visibleCount === 0 ? "block" : "none";
+});
+</script>
 
 </body>
 </html>
