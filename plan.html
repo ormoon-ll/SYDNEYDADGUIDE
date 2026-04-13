@@ -1,82 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plan Your Visit</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan Your Visit</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: url('./images/background.png') no-repeat center center fixed;
-            background-size: cover;
-            color: #fff;
-        }
+/* ===== BODY ===== */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: url('./images/background.png') no-repeat center center/cover;
+    min-height: 100vh;
+    color: #fff;
+    overflow-x: hidden;
+}
 
-        /* Overlay */
-        body::before {
-            content: '';
-            position: fixed; /* FIXED instead of absolute */
-            top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 0;
-        }
+/* DARK OVERLAY */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 0;
+}
 
-        .container {
-            position: relative;
-            z-index: 1;
-            padding: 30px 15px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* smaller for mobile */
-            gap: 15px;
-            max-width: 1000px;
-            margin: auto;
-        }
+/* ===== HEADER ===== */
+.header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 40px 20px 10px;
+}
 
-        .place-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px 10px;
-            text-decoration: none;
-            color: #fff;
-            font-weight: bold;
-            font-size: 1.1em;
-            text-align: center;
-            backdrop-filter: blur(5px);
-            transition: 0.3s;
-        }
+.header h1 {
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
 
-        .place-card:hover {
-            transform: scale(1.05);
-            background: linear-gradient(45deg, #FF5733, #FFC300, #33FFBD, #3375FF);
-        }
+.header p {
+    opacity: 0.8;
+    font-size: 1rem;
+}
 
-        /* Mobile tweaks */
-        @media (max-width: 480px) {
-            .container {
-                padding: 20px 10px;
-                gap: 10px;
-            }
+/* ===== GRID ===== */
+.container {
+    position: relative;
+    z-index: 1;
+    padding: 30px 15px 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+    max-width: 1100px;
+    margin: auto;
+}
 
-            .place-card {
-                font-size: 1em;
-                padding: 15px 8px;
-            }
-        }
-    </style>
+/* ===== CARD ===== */
+.place-card {
+    text-decoration: none;
+    color: #fff;
+    padding: 25px 15px;
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.15);
+
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.05rem;
+
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* GLOW EFFECT */
+.place-card::before {
+    content: "";
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+    transform: rotate(25deg);
+    top: -120%;
+    left: -120%;
+    transition: 0.5s;
+}
+
+/* HOVER */
+.place-card:hover::before {
+    top: 120%;
+    left: 120%;
+}
+
+.place-card:hover {
+    transform: translateY(-6px) scale(1.04);
+    background: linear-gradient(135deg, #ff6a00, #ffcc00, #00c9ff);
+    color: #000;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* CLICK FEEDBACK */
+.place-card:active {
+    transform: scale(0.97);
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 480px) {
+
+    .header h1 {
+        font-size: 1.8rem;
+    }
+
+    .container {
+        gap: 12px;
+    }
+
+    .place-card {
+        padding: 18px 10px;
+        font-size: 0.95rem;
+    }
+}
+</style>
 </head>
 
 <body>
-    <div class="container">
-        <a href="https://www.alburycity.nsw.gov.au/whats-on" class="place-card">Albury City</a>
-        <a href="https://www.armidale.nsw.gov.au/Our-region/Events" class="place-card">Armidale</a>
-    </div>
+
+<!-- HEADER -->
+<div class="header">
+    <h1>🌏 Plan Your Visit</h1>
+    <p>Explore Events Across Sydney Councils</p>
+</div>
+
+<!-- GRID -->
+<div class="container">
+
+<a href="https://www.bayside.nsw.gov.au/whats-on" class="place-card">Bayside Council</a>
+<a href="https://www.blacktown.nsw.gov.au/Events-and-activities" class="place-card">Blacktown City Council</a>
+<a href="https://www.bmcc.nsw.gov.au/whats-on" class="place-card">Blue Mountains City Council</a>
+<a href="https://www.burwood.nsw.gov.au/For-Residents/Events-and-Activities/Events-listing" class="place-card">Burwood Council</a>
+
+<!-- FIXED hre → href -->
+<a href="https://camden-events.bookable.net.au/#!/" class="place-card">Camden Council</a>
+
+<a href="https://www.campbelltown.nsw.gov.au/Whats-On" class="place-card">Campbelltown City Council</a>
+<a href="https://www.canadabay.nsw.gov.au/lifestyle/our-area/events" class="place-card">Canada Bay Council</a>
+<a href="https://www.cbcity.nsw.gov.au/whats-on" class="place-card">Canterbury-Bankstown Council</a>
+<a href="https://www.cityofparramatta.nsw.gov.au/community/events" class="place-card">City of Parramatta Council</a>
+<a href="https://whatson.cityofsydney.nsw.gov.au/" class="place-card">City of Sydney Council</a>
+<a href="https://www.cumberland.nsw.gov.au/whats-on" class="place-card">Cumberland Council</a>
+<a href="https://www.fairfieldcity.nsw.gov.au/Whats-on" class="place-card">Fairfield City Council</a>
+<a href="https://www.georgesriver.nsw.gov.au/Whats-On" class="place-card">Georges River Council</a>
+<a href="https://www.hawkesbury.nsw.gov.au/your-council/events" class="place-card">Hawkesbury City Council</a>
+<a href="https://www.hornsby.nsw.gov.au/Community/Events" class="place-card">Hornsby Shire Council</a>
+<a href="https://www.innerwest.nsw.gov.au/whats-on" class="place-card">Inner West Council</a>
+<a href="https://www.krg.nsw.gov.au/Things-to-do/Whats-on" class="place-card">Ku-ring-gai Council</a>
+<a href="https://www.lanecove.nsw.gov.au/Community/Events-and-Festivals" class="place-card">Lane Cove Council</a>
+<a href="https://www.liverpool.nsw.gov.au/whats-on" class="place-card">Liverpool City Council</a>
+<a href="https://events.mosman.nsw.gov.au/" class="place-card">Mosman Council</a>
+<a href="https://www.northsydney.nsw.gov.au/events" class="place-card">North Sydney Council</a>
+<a href="https://www.northernbeaches.nsw.gov.au/things-to-do/whats-on" class="place-card">Northern Beaches Council</a>
+<a href="https://www.penrithcity.nsw.gov.au/community-library/events" class="place-card">Penrith City Council</a>
+<a href="https://www.randwick.nsw.gov.au/community/whats-on" class="place-card">Randwick City Council</a>
+<a href="https://www.strathfield.nsw.gov.au/Play/Events-Calendar" class="place-card">Strathfield Council</a>
+<a href="https://www.sutherlandshire.nsw.gov.au/play-and-explore/whats-on" class="place-card">Sutherland Shire Council</a>
+<a href="https://www.waverley.nsw.gov.au/recreation/events" class="place-card">Waverley Council</a>
+<a href="https://www.willoughby.nsw.gov.au/Events" class="place-card">Willoughby City Council</a>
+<a href="https://www.wollondilly.nsw.gov.au/home/whats-on" class="place-card">Wollondilly Shire Council</a>
+<a href="https://www.woollahra.nsw.gov.au/Events" class="place-card">Woollahra Council</a>
+
+</div>
+
 </body>
 </html>
