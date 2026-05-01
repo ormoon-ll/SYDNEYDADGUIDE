@@ -65,7 +65,7 @@ body::before {
 .container {
     position: relative;
     z-index: 1;
-    padding: 20px 15px 50px;
+    padding: 20px 15px 30px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 18px;
@@ -96,12 +96,33 @@ body::before {
     color: #000;
 }
 
+/* BACK BUTTON (BOTTOM) */
+.back {
+    display: block;
+    text-align: center;
+    margin: 40px auto 30px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.95em;
+    opacity: 0.8;
+    position: relative;
+    z-index: 1;
+    transition: 0.3s;
+}
+
+.back:hover {
+    opacity: 1;
+    transform: translateX(-3px);
+}
+
 /* NO RESULT TEXT */
 .no-result {
     text-align: center;
     margin-top: 20px;
     display: none;
     opacity: 0.8;
+    position: relative;
+    z-index: 1;
 }
 
 /* MOBILE */
@@ -118,7 +139,6 @@ body::before {
 <div class="header">
     <h1>🌏 Plan Your Visit</h1>
 
-    <!-- SEARCH -->
     <div class="search-box">
         <input type="text" id="searchInput" placeholder="Search council...">
     </div>
@@ -160,6 +180,9 @@ body::before {
 </div>
 
 <div class="no-result" id="noResult">No councils found 😢</div>
+
+<!-- BACK BUTTON AT BOTTOM -->
+<a href="index.html" class="back">← Back to Home</a>
 
 <!-- SEARCH SCRIPT -->
 <script>
